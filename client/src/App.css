@@ -1,0 +1,228 @@
+/* Spotify-inspired Styles */
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  height: 100vh;
+  color: white;
+  overflow: hidden;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 10px;
+  box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+  text-align: center;
+}
+
+.auth-container h1 {
+  margin-bottom: 30px;
+  color: #1DB954;
+  font-weight: 700;
+  font-size: 32px;
+}
+
+.auth-container h2 {
+  color: #fff;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.auth-container input {
+  padding: 15px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.auth-container input:focus {
+  outline: none;
+  background: rgba(255,255,255,0.15);
+  box-shadow: 0 0 10px rgba(29, 185, 84, 0.5);
+}
+
+.auth-container input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.auth-container button[type="submit"] {
+  padding: 15px;
+  background: #1DB954;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.auth-container button[type="submit"]:hover {
+  background: #1ed760;
+  transform: scale(1.05);
+}
+
+.auth-container .switch-btn {
+  background: none;
+  color: #b3b3b3;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 5px;
+}
+
+.auth-container .switch-btn:hover {
+  color: white;
+}
+
+.auth-container p {
+  color: #b3b3b3;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.error {
+  color: #f15e6c;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Spotify Logo Placeholder */
+.auth-container::before {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  background: #1DB954;
+  border-radius: 50%;
+}
+
+/* Player Logout Button */
+.logout-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.logout-btn:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.upload-section {
+  margin-bottom: 20px;
+}
+
+.upload-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.playlist {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.playlist ul {
+  list-style: none;
+  padding: 0;
+}
+
+.playlist li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.playlist li.active {
+  background-color: #e9f7ff;
+}
+
+.now-playing {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.now-playing button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Username button positioned at previous Logout location */
+.user-bar { }
+
+.user-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.user-button:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* When Logout is toggled from the App user bar, show it below the username */
+.user-bar .logout-btn {
+  top: 60px;
+  right: 20px;
+  z-index: 100;
+}

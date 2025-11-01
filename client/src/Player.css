@@ -1,0 +1,1186 @@
+.player.spotify-style {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #121212;
+  color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  position: relative;
+}
+
+.sticky-top-bar {
+  position: sticky;
+  top: 0;
+  background: #121212;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  z-index: 100;
+  border-bottom: 1px solid #282828;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  width: 100%;
+}
+
+.top-bar-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1db954;
+  margin-right: 20px;
+}
+
+.search-bar {
+  flex: 1;
+  margin: 0 20px;
+}
+
+.search-bar input {
+  width: 100%;
+  background: #282828;
+  border: none;
+  border-radius: 20px;
+  padding:  16px;
+  color: white;
+}
+
+.user-info-container {
+  position: relative;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.user-info {
+  background: #282828;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+.logout-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #282828;
+  border-radius: 4px;
+  padding: 8px;
+  margin-top: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  z-index: 10;
+  min-width: 100px;
+}
+
+.logout-menu button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  padding: 4px 8px;
+}
+
+.logout-menu button:hover {
+  background: #333;
+  border-radius: 2px;
+}
+
+.sidebar {
+  width: 232px;
+  background: #000;
+  padding: 24px 8px;
+  position: fixed;
+  top: 0;
+  bottom: 90px;
+  left: 0;
+  overflow-y: auto;
+}
+/* Modern translucent vertical scrollbar for playlist/sidebar */
+.sidebar {
+  /* Firefox native scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+
+/* WebKit (Chrome, Edge) custom scrollbar styling */
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent; /* transparent track for a cleaner, modern look */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(29, 185, 84, 0.35));
+  border-radius: 8px;
+  border: 2px solid rgba(0, 0, 0, 0.35); /* subtle outline to float over the black sidebar */
+}
+
+.sidebar:hover::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(29, 185, 84, 0.55)); /* brighter on hover */
+}
+
+.sidebar::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.logo {
+  padding: 0 24px;
+  margin-bottom: 18px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #1db954;
+}
+
+.navigation li {
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  opacity: 0.7;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navigation li.active {
+  opacity: 1;
+  background: #282828;
+  border-radius: 4px;
+}
+
+.navigation li:hover {
+  opacity: 1;
+}
+
+.playlists {
+  margin-top: 24px;
+  border-top: 1px solid #282828;
+  padding-top: 16px;
+}
+
+.playlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.playlist-header button {
+  background: transparent;
+  border: none;
+  color: #b3b3b3;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.playlists ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 8px;
+}
+
+.playlists li {
+  padding: 8px 24px;
+  font-size: 14px;
+  opacity: 0.7;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playlists li.active {
+  opacity: 1;
+}
+
+.playlists li:hover {
+  opacity: 1;
+}
+
+.create-playlist {
+  padding: 8px 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.create-playlist input {
+  flex: 1;
+  background: #282828;
+  border: 1px solid #535353;
+  border-radius: 4px;
+  padding: 8px;
+  color: white;
+}
+
+.create-playlist button {
+  background: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.navigation ul {
+  list-style: none;
+  padding: 0;
+}
+
+.navigation li {
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.navigation li.active {
+  opacity: 1;
+  background: #282828;
+  border-radius: 4px;
+}
+
+.navigation li:hover {
+  opacity: 1;
+}
+
+.playlists {
+  margin-top: 24px;
+  border-top: 1px solid #282828;
+  padding-top: 16px;
+}
+
+.playlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.playlist-header button {
+  background: transparent;
+  border: none;
+  color: #b3b3b3;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.playlists ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 8px;
+}
+
+.playlists li {
+  padding: 8px 24px;
+  font-size: 14px;
+  opacity: 0.7;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playlists li.active {
+  opacity: 1;
+}
+
+.playlists li:hover {
+  opacity: 1;
+}
+
+.create-playlist {
+  padding: 8px 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.create-playlist input {
+  flex: 1;
+  background: #282828;
+  border: 1px solid #535353;
+  border-radius: 4px;
+  padding: 8px;
+  color: white;
+}
+
+.create-playlist button {
+  background: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 232px;
+  padding: 0 32px;
+  overflow-y: auto;
+  padding-bottom: 90px;
+  background: linear-gradient(to bottom, #3c096c, #121212);
+  background-size: 100% 300px;
+  background-repeat: no-repeat;
+}
+
+/* Modern translucent vertical scrollbar for main content */
+.main-content {
+  /* Firefox native scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+}
+
+/* WebKit (Chrome, Edge) custom scrollbar styling */
+.main-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.main-content::-webkit-scrollbar-track {
+  background: transparent; /* minimal, keeps gradient visible */
+}
+
+.main-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(29, 185, 84, 0.40));
+  border-radius: 8px;
+  border: 2px solid rgba(18, 18, 18, 0.35); /* subtle outline to float over dark gradient */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25); /* soft depth */
+}
+
+.main-content:hover::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.26), rgba(29, 185, 84, 0.60)); /* brighter on hover */
+}
+
+.main-content::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* New top bar styles */
+.top-bar {
+  display: flex;
+  align-items: center;
+  padding: 16px 32px;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  position: sticky;
+  top: 0;
+}
+
+.navigation-controls {
+  display: flex;
+  gap: 16px;
+}
+
+.nav-btn {
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.search-bar {
+  flex: 1;
+  margin: 0 20px;
+}
+
+.search-bar input {
+  width: 100%;
+  background: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  color: black;
+  font-size: 14px;
+}
+
+.content {
+  padding: 20px 32px;
+}
+
+.playlist-heading {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.upload-section {
+  margin-bottom: 24px;
+}
+
+.upload-btn {
+  background: #1db954;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.upload-btn input {
+  display: none;
+}
+
+.song-list {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.song-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.song-list th {
+  text-align: left;
+  padding: 12px;
+  font-size: 14px;
+  color: #b3b3b3;
+  font-weight: normal;
+  border-bottom: 1px solid #282828;
+}
+
+.song-list td {
+  padding: 12px;
+  border-bottom: 1px solid #282828;
+}
+
+.song-list tr:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.song-list tr.active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.song-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.song-thumbnail {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.default-thumbnail {
+  width: 40px;
+  height: 40px;
+  background: #282828;
+  border-radius: 4px;
+}
+
+.song-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.song-name {
+  font-weight: 500;
+}
+
+.song-artist-mobile {
+  display: none;
+  font-size: 12px;
+  color: #b3b3b3;
+}
+
+@media (max-width: 768px) {
+  .song-artist {
+    display: none;
+  }
+  .song-artist-mobile {
+    display: block;
+  }
+}
+
+.song-list {
+  background: #181818;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.song-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.song-list th {
+  text-align: left;
+  padding: 12px;
+  font-size: 14px;
+  color: #b3b3b3;
+  font-weight: normal;
+  border-bottom: 1px solid #282828;
+}
+
+.song-list td {
+  padding: 12px;
+  border-bottom: 1px solid #282828;
+}
+
+.song-list tr:hover {
+  background: #282828;
+}
+
+.song-list tr.active {
+  background: #333;
+}
+
+.song-list .like-btn {
+  background: transparent;
+  border: none;
+  color: #b3b3b3;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.song-list .like-btn.liked {
+    color: #ff007f;
+}
+
+.player-controls .like-btn.liked {
+    color: #ff007f;
+}
+
+/* Spotify-style Now Playing Bar */
+.now-playing-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: #181818;
+  border-top: 1px solid #282828;
+  display: flex;
+  padding: 0 16px;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+}
+
+.now-playing-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 30%;
+}
+
+.now-playing-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+}
+
+.now-playing-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 30%;
+  justify-content: flex-end;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.player-controls button {
+  background: transparent;
+  border: none;
+  color: white; /* Button text color */
+  cursor: pointer;
+}
+
+.player-controls button svg {
+  fill: white; /* Ensure SVG icons are white */
+}
+
+.player-controls button:hover {
+  opacity: 0.8; /* Hover effect */
+}
+
+.play-btn {
+  background: #1DB954; /* Spotify green */
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.play-btn svg {
+  fill: rgb(20, 1, 1); /* Play button icon color */
+}
+
+.play-btn:hover {
+  transform: scale(1.06);
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.time {
+  font-size: 11px;
+  color: #b3b3b3;
+  min-width: 35px;
+}
+
+.progress-bar {
+  flex-grow: 1;
+  height: 4px;
+  background-color: #535353;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+.progress {
+  height: 100%;
+  background-color: #b3b3b3;
+  border-radius: 2px;
+  position: relative;
+}
+
+.progress-bar:hover .progress {
+  background-color: #1db954;
+}
+
+.progress-bar:hover .progress::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.volume-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100px;
+}
+
+.volume-bar {
+  flex-grow: 1;
+  height: 4px;
+  background-color: #535353;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+.volume-progress {
+  height: 100%;
+  background-color: #1DB954;
+  border-radius: 2px;
+  position: relative;
+}
+
+.volume-bar:hover .volume-progress {
+  background-color: #1ED760;
+}
+
+.volume-bar:hover .volume-progress::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+/* Drag-and-drop hover state for playlist items */
+.playlists li.droppable-hover {
+  opacity: 1;
+  background: #282828;
+  border-radius: 4px;
+  outline: 1px dashed #1db954;
+}
+
+/* Optional indicator */
+.playlists li.droppable-hover::after {
+  content: ' +';
+  color: #1db954;
+  font-weight: bold;
+}
+/* Tooltip for playlist items on hover */
+.playlists li.has-tooltip {
+  position: relative;
+  /* allow tooltip to overflow outside the list item */
+  overflow: visible;
+}
+
+/* Tooltip bubble */
+.playlists li.has-tooltip:hover::after {
+  /* content: attr(data-tooltip); */
+  position: absolute;
+  z-index: 2000;
+  left: 100%;
+  top: 50%;
+  transform: translate(8px, -50%);
+  background: #333;
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.35);
+  opacity: 1;
+  pointer-events: none;
+}
+
+/* Hidden state (no hover) */
+.playlists li.has-tooltip::after {
+  content: '';
+  opacity: 0;
+}
+
+/* Tooltip arrow digunakan untuk menampilkan tool*/
+.playlists li.has-tooltip:hover::before {
+  content: '';
+  position: absolute;
+  z-index: 2001;
+  left: calc(100% + 2px);
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent #333;
+  opacity: 1;
+}
+
+/* Hidden arrow (no hover) */
+.playlists li.has-tooltip::before {
+  content: '';
+  opacity: 0;
+}
+/* Row actions: like + remove icons, remove shows on hover */
+.row-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* Remove button hidden by default, visible on row hover */
+.remove-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #b3b3b3;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 0px;
+}
+
+/* Show remove icon when hovering the song row */
+.song-list tbody tr:hover .remove-btn {
+  /* display: inline-block; */
+  color: #ff4d4f;
+}
+
+.remove-btn:hover {
+  color: #ff0000;
+  transform: scale(1.06);
+}
+/* Playlist delete button on hover */
+.playlists li {
+  position: relative;
+}
+
+.playlist-delete-btn {
+  display: none;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #b3b3b3;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+.playlists li:hover .playlist-delete-btn {
+  display: inline-block;
+  color: #ff4d4f;
+}
+
+.playlist-delete-btn:hover {
+  color: #ff0000;
+  transform: scale(1.06);
+}
+/* Smooth reveal for playlist delete button */
+.playlist-delete-btn {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(6px);
+  transition: opacity 200ms ease, transform 200ms ease, color 200ms ease;
+}
+
+.playlists li:hover .playlist-delete-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+  color: #ff4d4f;
+}
+
+.playlist-delete-btn:hover {
+  color: #ff1f24;
+}
+/* Delete song button reveals only on row hover */
+.delete-song-btn {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(6px);
+  transition: opacity 200ms ease, transform 200ms ease, color 200ms ease;
+  background: transparent;
+  border: none;
+  color: #b3b3b3;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.song-list tbody tr:hover .delete-song-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+  color: #ff4d4f;
+}
+
+.delete-song-btn:hover {
+  color: #ff1f24;
+  transform: translateX(0) scale(1.06);
+}
+/* Align playlist delete button inline with playlist name and set green-to-red hover behavior */
+.playlists li {
+  display: flex;
+  align-items: center;
+}
+
+.playlist-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Default: hidden until hover on the playlist item; when visible: green */
+.playlist-delete-btn {
+  margin-left: auto;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(6px);
+  transition: opacity 200ms ease, transform 200ms ease, color 200ms ease;
+  background: transparent;
+  border: none;
+  color: #1db954; /* green before mouseover on the button */
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+/* Reveal smoothly when hovering the playlist item, keep green until hovering the button itself */
+.playlists li:hover .playlist-delete-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+  color: #1db954;
+}
+
+/* When hovering the delete button itself, turn red */
+.playlist-delete-btn:hover {
+  color: #ff0000;
+}
+/* Overrides: align playlist delete button inline and ensure hover turns red */
+.playlists li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.playlist-name {
+  flex: 1;
+  min-width: 0; /* allow text ellipsis */
+}
+
+/* Inline positioning: cancel any previous absolute positioning */
+.playlist-delete-btn {
+  position: static !important;
+  right: auto !important;
+  top: auto !important;
+  margin-left: 8px;
+}
+
+/* Default reveal behavior on list item hover; default color green */
+.playlists li:hover .playlist-delete-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+  color: #1db954; /* green before hovering the button */
+}
+
+/* When hovering directly on the delete button, force red */
+.playlists li:hover .playlist-delete-btn:hover {
+  color: #ff0000 !important;
+}
+
+/* Tidy SVG alignment */
+.playlist-delete-btn svg {
+  display: block;
+  pointer-events: none;
+}
+/* Align favorite button inline with song row content */
+.song-list th,
+.song-list td {
+  vertical-align: middle;
+}
+
+/* Ensure the actions column aligns items horizontally and vertically */
+.song-list .row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* Make the favorite button sit inline and centered */
+.song-list .like-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0 4px;
+  margin: 0;
+  vertical-align: middle;
+}
+
+/* Keep the title cell content centered vertically next to thumbnail */
+.song-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+/* Inline alignment and color behavior for delete song button */
+.delete-song-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  margin-left: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #1db954; /* green by default */
+}
+
+/* Keep button visible on row hover if reveal styling is used elsewhere */
+.song-list tbody tr:hover .delete-song-btn {
+  color: #1db954; /* remain green when the row reveals it */
+}
+
+/* Hover directly on the delete song button -> turn yellow */
+.delete-song-btn:hover {
+  color: #ffd633; /* yellow on hover */
+}
+/* Override colors for remove-from-playlist button:
+   - On song row hover: gold
+   - On button hover: red */
+.remove-btn {
+  transition: color 200ms ease, transform 200ms ease;
+}
+
+/* Hovering the song row (not the button) -> gold */
+.song-list tbody tr:hover .remove-btn {
+  color: #FFD700; /* gold */
+}
+
+/* Hovering the button itself -> red, overrides row hover */
+.remove-btn:hover {
+  color: #ff0000 !important; /* red */
+}
+/* Inline actions next to song title, centered vertically in the row */
+.inline-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 12px; /* sit right of the song title */
+}
+
+/* Ensure song row cells are vertically centered */
+.song-list td,
+.song-list th {
+  vertical-align: middle;
+}
+/* Ensure remove-from-playlist button is visible, inline, and gold by default */
+.song-list .row-actions .remove-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  line-height: 1;
+  margin-left: 8px;
+  color: #FFD700 !important; /* gold */
+  cursor: pointer;
+}
+
+/* Keep row cells vertically centered */
+.song-list td,
+.song-list th {
+  vertical-align: middle;
+}
+/* Inline remove-from-playlist button next to song title, centered and gold by default */
+.inline-actions .remove-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  margin-left: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #FFD700; /* gold by default */
+}
+
+/* Keep vertical centering across the row */
+.song-list td,
+.song-list th {
+  vertical-align: middle;
+}
+/* Sidebar toggle states */
+.sidebar.hidden {
+  display: none;
+}
+
+/* Smooth main-content shift when toggling sidebar */
+.main-content {
+  transition: margin-left 200ms ease;
+}
+
+/* Expanded content when sidebar is hidden */
+.main-content.expanded {
+  margin-left: 0;
+}
+/* Collapsed sidebar shows a narrow hover strip that expands on hover */
+.sidebar.collapsed {
+  width: 16px;
+  min-width: 16px;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  bottom: 90px; /* preserve bottom bar space */
+  left: 0;
+  background: #000;
+  z-index: 100;
+}
+
+/* Expand sidebar when hovered */
+.sidebar.collapsed:hover {
+  width: 232px;
+  min-width: 232px;
+  transition: width 200ms ease;
+}
+
+/* Ensure main-content uses margin-left only when sidebar is not collapsed */
+.main-content {
+  transition: margin-left 200ms ease;
+}
+
+.sidebar.collapsed ~ .main-content,
+.main-content.expanded {
+  margin-left: 16px; /* narrow strip */
+}
+
+.sidebar:not(.collapsed) ~ .main-content {
+  margin-left: 232px; /* standard width */
+}
+/* Edit button: transparent background, hidden by default */
+.inline-actions .edit-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #b3b3b3;
+  cursor: pointer;
+  margin-left: 8px;
+  opacity: 0;
+  transition: opacity 200ms ease, color 200ms ease;
+  line-height: 1;
+}
+
+/* Reveal edit button when hovering the song title area or the entire row */
+.song-title-wrapper:hover .edit-btn,
+.song-list tbody tr:hover .edit-btn {
+  display: inline-flex;
+  opacity: 1;
+}
+
+/* Optional highlight on direct hover of edit button */
+.inline-actions .edit-btn:hover {
+  color: #ffffff;
+}
+/* Override: tooltip should appear below playlist name and use title attribute for content */
+.playlists li.has-tooltip:hover::after {
+  content: attr(title);
+  position: absolute;
+  z-index: 2000;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, 8px);
+  background: #333;
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.35);
+  opacity: 1;
+  pointer-events: none;
+}
+
+.playlists li.has-tooltip:hover::before {
+  content: '';
+  position: absolute;
+  z-index: 2001;
+  top: calc(100% + 2px);
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-width: 6px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent; /* arrow pointing up from tooltip */
+  opacity: 1;
+}

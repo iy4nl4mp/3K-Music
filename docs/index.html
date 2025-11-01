@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3K Music - Dokumentasi Lengkap</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:#0b0c10;color:#e5e7eb;line-height:1.6}
+    main{max-width:1000px;margin:0 auto;padding:32px}
+    h1,h2,h3{color:#fff}
+    code,kbd,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    pre{background:#111827;border:1px solid #1f2937;border-radius:8px;padding:16px;overflow:auto}
+    a{color:#60a5fa;text-decoration:none}
+    a:hover{text-decoration:underline}
+    .tag{display:inline-block;padding:2px 8px;border:1px solid #374151;border-radius:999px;font-size:12px;margin-right:6px;color:#d1d5db}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .card{background:#0f172a;border:1px solid #1f2937;border-radius:12px;padding:16px}
+    .muted{color:#9ca3af}
+    .toc ol{margin:0;padding-left:16px}
+    .endpoint{border-left:4px solid #1db954;padding-left:12px;margin:12px 0}
+    .get{border-color:#10b981}.post{border-color:#3b82f6}.put{border-color:#f59e0b}.del{border-color:#ef4444}
+    table{width:100%;border-collapse:collapse}
+    th,td{border:1px solid #374151;padding:8px;text-align:left}
+    th{background:#111827}
+    .small{font-size:13px}
+    .kbd{background:#111827;border:1px solid #374151;border-bottom-width:3px;border-radius:6px;padding:0 6px}
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>3K Music — Dokumentasi Lengkap</h1>
+      <p class="muted">Dokumentasi fitur, API, model data, dan antarmuka pengguna aplikasi 3K Music (Full‑Stack: Node.js/Express + MongoDB + React TypeScript).</p>
+      <p class="small">Repo lokal: <em>d:/3kmusic</em></p>
+    </header>
+
+    <section class="toc">
+      <h2>Daftar Isi</h2>
+      <ol>
+        <li><a href="#mulai">Cara Menjalankan</a></li>
+        <li><a href="#arsitektur">Arsitektur & Struktur Direktori</a></li>
+        <li><a href="#konfigurasi">Konfigurasi & Environment</a></li>
+        <li><a href="#api">Dokumentasi API Backend</a></li>
+        <li><a href="#model">Model Data (MongoDB/Mongoose)</a></li>
+        <li><a href="#middleware">Middleware</a></li>
+        <li><a href="#client">Fitur Frontend (React)</a></li>
+        <li><a href="#ui">Kontrol UI Pemutar</a></li>
+        <li><a href="#error">Penanganan Error & Kode Status</a></li>
+        <li><a href="#catatan">Catatan & Batasan</a></li>
+      </ol>
+    </section>
+
+    <section id="mulai">
+      <h2>Cara Menjalankan</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Backend</h3>
+          <pre><code>cd server
+npm install
+npm run start</code></pre>
+          <p class="small">Server default pada <strong>http://localhost:3003</strong>.</p>
+        </div>
+        <div class="card">
+          <h3>Frontend</h3>
+          <pre><code>cd client
+npm install
+npm run start</code></pre>
+          <p class="small">Aplikasi React default pada <strong>http://localhost:3000</strong>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="arsitektur">
+      <h2>Arsitektur & Struktur Direktori</h2>
+      <div class="card">
+        <p><span class="tag">Express</span><span class="tag">Mongoose</span><span class="tag">JWT</span><span class="tag">Multer</span><span class="tag">React TS</span></p>
+        <pre><code>d:/3kmusic
+├─ server/                ← Backend (Node.js/Express)
+│  ├─ index.js            ← Entry & registrasi routes
+│  ├─ routes/             ← auth, songs, playlists, favorites
+│  ├─ models/             ← User, Song, Playlist, Favorite
+│  ├─ middleware/         ← auth (JWT)
+│  └─ uploads/            ← Berkas audio yang diunggah
+└─ client/                ← Frontend (React + TypeScript)
+   └─ src/                ← App.tsx, Player.tsx, dsb.
+</code></pre>
+        <p>Server meng-serve berkas audio statik via <code>/uploads</code>. Routing inti didefinisikan di <code>index.js</code>.</p>
+      </div>
+    </section>
+
+    <section id="konfigurasi">
+      <h2>Konfigurasi & Environment</h2>
+      <div class="card">
+        <ul>
+          <li><strong>PORT</strong> — default <code>3003</code></li>
+          <li><strong>MONGODB_URI</strong> — URL MongoDB (default lokal: <code>mongodb://localhost:27017/music-app</code>)</li>
+          <li><strong>JWT_SECRET</strong> — rahasia penandatangan token JWT</li>
+        </ul>
+        <pre><code># server/.env
+MONGODB_URI=mongodb://localhost:27017/music-app
+JWT_SECRET=ubah_rahasia_anda</code></pre>
+        <p>Multer menyimpan file ke folder <code>server/uploads</code> dengan nama <em>timestamp</em> + ekstensi asli.</p>
+      </div>
+    </section>
+
+    <section id="api">
+      <h2>Dokumentasi API Backend</h2>
+
+      <article>
+        <h3>/api/auth</h3>
+        <div class="endpoint post">
+          <p><strong>POST</strong> <code>/api/auth/register</code></p>
+          <p><em>Body (JSON):</em></p>
+          <pre><code>{ "username": "nama", "email": "user@example.com", "password": "rahasia" }</code></pre>
+          <p><em>Respon:</em> <code>201 Created</code> { message }</p>
+        </div>
+        <div class="endpoint post">
+          <p><strong>POST</strong> <code>/api/auth/login</code></p>
+          <p><em>Body (JSON):</em></p>
+          <pre><code>{ "email": "user@example.com", "password": "rahasia" }</code></pre>
+          <p><em>Respon sukses:</em> <code>200 OK</code> { token } (kedaluwarsa 1 jam)</p>
+        </div>
+        <div class="endpoint get">
+          <p><strong>GET</strong> <code>/api/auth/me</code></p>
+          <p><em>Header:</em> <code>Authorization: Bearer <token></code></p>
+          <p><em>Respon:</em> <code>200 OK</code> { id, username, email }</p>
+        </div>
+      </article>
+
+      <article>
+        <h3>/api/songs</h3>
+        <div class="endpoint get">
+          <p><strong>GET</strong> <code>/api/songs</code></p>
+          <p>Mengambil seluruh daftar lagu.</p>
+        </div>
+        <div class="endpoint post">
+          <p><strong>POST</strong> <code>/api/songs/upload</code></p>
+          <p><em>Header:</em> <code>Authorization: Bearer <token></code></p>
+          <p><em>Form-Data:</em> <code>song</code> (file audio), opsional <code>title</code>, <code>artist</code></p>
+          <p><em>Respon:</em> <code>201 Created</code> { message, song }</p>
+        </div>
+        <div class="endpoint put">
+          <p><strong>PUT</strong> <code>/api/songs/:id</code></p>
+          <p>Update metadata (pemilik saja). <em>Body:</em> { title?, artist? }</p>
+        </div>
+        <div class="endpoint del">
+          <p><strong>DELETE</strong> <code>/api/songs/:id</code></p>
+          <p>Hapus lagu (pemilik saja). Juga menghapus referensi dari playlist & favorit dan mencoba menghapus berkas.</p>
+        </div>
+      </article>
+
+      <article>
+        <h3>/api/playlists</h3>
+        <div class="endpoint get">
+          <p><strong>GET</strong> <code>/api/playlists</code></p>
+          <p><em>Header:</em> Bearer token. Mengambil semua playlist milik user (songs ter-populate).</p>
+        </div>
+        <div class="endpoint post">
+          <p><strong>POST</strong> <code>/api/playlists</code></p>
+          <p>Buat playlist baru. <em>Body:</em> { name }</p>
+        </div>
+        <div class="endpoint post">
+          <p><strong>POST</strong> <code>/api/playlists/:id/songs</code></p>
+          <p>Tambah lagu ke playlist (tanpa duplikasi). <em>Body:</em> { songId }</p>
+        </div>
+        <div class="endpoint del">
+          <p><strong>DELETE</strong> <code>/api/playlists/:id/songs/:songId</code></p>
+          <p>Hapus lagu tertentu dari playlist.</p>
+        </div>
+        <div class="endpoint del">
+          <p><strong>DELETE</strong> <code>/api/playlists/:id</code></p>
+          <p>Hapus playlist milik sendiri.</p>
+        </div>
+      </article>
+
+      <article>
+        <h3>/api/favorites</h3>
+        <div class="endpoint get">
+          <p><strong>GET</strong> <code>/api/favorites</code></p>
+          <p>Kembalikan list lagu favorit user (populate ke objek Song).</p>
+        </div>
+        <div class="endpoint post">
+          <p><strong>POST</strong> <code>/api/favorites</code></p>
+          <p>Tambah lagu ke favorit. <em>Body:</em> { songId }</p>
+        </div>
+        <div class="endpoint del">
+          <p><strong>DELETE</strong> <code>/api/favorites</code></p>
+          <p>Hapus dari favorit. <em>Body atau Query:</em> songId</p>
+        </div>
+      </article>
+
+      <div class="card small">
+        <p><strong>Autentikasi:</strong> semua endpoint tulis (upload/update/delete, playlist, favorites) memerlukan header <code>Authorization: Bearer <token></code> yang didapat dari <code>/api/auth/login</code>.</p>
+      </div>
+    </section>
+
+    <section id="model">
+      <h2>Model Data (Mongoose)</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>User</h3>
+          <ul>
+            <li>username: String (required)</li>
+            <li>email: String (unique, required)</li>
+            <li>password: String (hash bcrypt, required)</li>
+            <li>createdAt: Date (default now)</li>
+            <li>resetPasswordToken, resetPasswordExpires: opsional</li>
+          </ul>
+          <p class="small">Pre-save: hash password dengan bcrypt 10 salt rounds.</p>
+        </div>
+        <div class="card">
+          <h3>Song</h3>
+          <ul>
+            <li>title: String (required)</li>
+            <li>artist: String (required)</li>
+            <li>album: String (opsional)</li>
+            <li>duration: Number (opsional)</li>
+            <li>filePath: String (required)</li>
+            <li>userId: ObjectId(User, required)</li>
+            <li>createdAt: Date</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Playlist</h3>
+          <ul>
+            <li>name: String (required)</li>
+            <li>userId: ObjectId(User, required)</li>
+            <li>songs: ObjectId(Song)[]</li>
+            <li>createdAt: Date</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Favorite</h3>
+          <ul>
+            <li>userId: ObjectId(User, required)</li>
+            <li>songId: ObjectId(Song, required)</li>
+            <li>status: "active" | "removed" (default: active)</li>
+            <li>createdAt: Date</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="middleware">
+      <h2>Middleware</h2>
+      <div class="card">
+        <h3>auth (JWT)</h3>
+        <p>Memvalidasi header <code>Authorization: Bearer <token></code>, memverifikasi token dengan <code>JWT_SECRET</code>, memuat user, lalu menempelkan <code>req.user = { id, username }</code>.</p>
+        <pre><code>// Contoh penggunaan di route
+router.post('/upload', auth, upload.single('song'), handler)</code></pre>
+      </div>
+    </section>
+
+    <section id="client">
+      <h2>Fitur Frontend (React)</h2>
+      <div class="card">
+        <h3>App.tsx</h3>
+        <ul>
+          <li>Autentikasi: <code>handleLogin()</code>, <code>handleRegister()</code>, <code>handleLogout()</code></li>
+          <li>Menyimpan token JWT di <code>localStorage</code>, memuat profil via <code>/api/auth/me</code></li>
+          <li>Menampilkan <code>Player</code> saat sudah login</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Player.tsx</h3>
+        <ul>
+          <li>Ambil data: <code>fetchSongs()</code>, <code>fetchPlaylists()</code>, <code>fetchFavorites()</code></li>
+          <li>Favorit: <code>toggleFavorite(songId)</code> → POST/DELETE <code>/api/favorites</code></li>
+          <li>Playlist: <code>createPlaylist()</code>, <code>addToPlaylist()</code>, <code>removeFromPlaylist()</code>, <code>deletePlaylist()</code></li>
+          <li>Upload: <code>handleFileUpload()</code> → POST <code>/api/songs/upload</code></li>
+          <li>Edit metadata lagu: <code>startEdit()</code>, <code>saveEdit()</code>, <code>cancelEdit()</code> → PUT <code>/api/songs/:id</code></li>
+          <li>Putar lagu: <code>selectSong()</code>, <code>togglePlay()</code>, <code>playNext()</code>, <code>playPrev()</code></li>
+          <li>Kontrol audio: <code>handleSeek()</code>, <code>handleVolumeClick()</code>, <code>toggleMute()</code>, <code>toggleRepeat()</code>, <code>toggleShuffle()</code></li>
+          <li>Pencarian & filter playlist/favorit, drag-and-drop menambah lagu ke playlist</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="ui">
+      <h2>Kontrol UI Pemutar</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Sidebar & Daftar</h3>
+          <ul>
+            <li>Toggle Sidebar: tombol ☰</li>
+            <li>Playlist: buat, pilih, hapus; drag-and-drop lagu ke item playlist</li>
+            <li>Favorites: daftar lagu yang ditandai ❤️</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Now Playing Bar</h3>
+          <ul>
+            <li>Play/Pause, Next, Prev</li>
+            <li>Progress bar (click seek), durasi</li>
+            <li>Repeat, Shuffle</li>
+            <li>Volume + Mute</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="error">
+      <h2>Penanganan Error & Kode Status</h2>
+      <table>
+        <thead>
+          <tr><th>Endpoint</th><th>Status</th><th>Kondisi</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>/api/auth/register</td><td>400</td><td>Email sudah terdaftar</td></tr>
+          <tr><td>/api/auth/login</td><td>401</td><td>Kredensial tidak valid</td></tr>
+          <tr><td>/api/auth/me</td><td>401</td><td>Token hilang/tidak valid</td></tr>
+          <tr><td>/api/songs/upload</td><td>400</td><td>Gagal unggah (validasi/file)</td></tr>
+          <tr><td>/api/songs/:id</td><td>403</td><td>Bukan pemilik</td></tr>
+          <tr><td>/api/songs/:id</td><td>404</td><td>Lagu tidak ditemukan</td></tr>
+          <tr><td>/api/playlists/:id</td><td>403</td><td>Bukan pemilik</td></tr>
+          <tr><td>/api/playlists</td><td>400</td><td>Nama playlist kosong</td></tr>
+          <tr><td>/api/favorites</td><td>400</td><td>songId tidak valid/kosong</td></tr>
+        </tbody>
+      </table>
+      <p class="small">Sebagian besar kesalahan server mengembalikan <code>500 Server error</code> dengan pesan umum.</p>
+    </section>
+
+    <section id="catatan">
+      <h2>Catatan & Batasan</h2>
+      <ul>
+        <li>JWT kedaluwarsa dalam 1 jam; tidak ada refresh token.</li>
+        <li>URL backend di frontend masih <code>http://localhost:3003</code>; ganti saat deploy produksi.</li>
+        <li>Endpoint <code>/api/songs</code> tidak mensyaratkan token, namun frontend tetap mengirim header Authorization — aman diabaikan server.</li>
+        <li>Penghapusan berkas audio dari disk bersifat best-effort (error diabaikan bila file hilang).</li>
+        <li>Favorites GET mengembalikan array lagu (hasil <code>populate</code>), UI memetakannya ke ID.</li>
+      </ul>
+    </section>
+
+    <footer>
+      <p class="muted small">Dokumentasi dihasilkan berdasarkan kode saat ini. © 3K Music</p>
+    </footer>
+  </main>
+</body>
+</html>
